@@ -1,7 +1,9 @@
-import wss from '../../App';
+const init = (socket) => {
 
-wss.socket('connect', (socket) => {
+  socket.on('connection', (socket) => {
+    console.log(`Init connection: ID ${socket.id}`);
+  });
 
-  console.log(`\n[X] Client connected...`);
+}
 
-});
+export default init;

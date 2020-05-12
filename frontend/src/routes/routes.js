@@ -1,13 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Home from '../pages/home/index';
+import Join from '../pages/join/join';
+import Chat from '../pages/chat/chat';
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={ Home } />
+        <Route exact path="/" component={ Join } />
+        <Route exact path="/chat" component={ Chat } />
       </Switch>
     </BrowserRouter>
   );
