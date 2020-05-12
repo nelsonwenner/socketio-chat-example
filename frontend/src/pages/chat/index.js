@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 
-import Chat from '../../components/common/Chat';
+import Chat from '../../components/Chat';
 
 class ChatContainer extends Component {
   

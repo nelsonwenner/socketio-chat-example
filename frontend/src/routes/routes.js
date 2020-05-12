@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Join from '../pages/join/index';
+import Join from '../pages/join/join';
 import Chat from '../pages/chat/index';
 
 const Routes = () => {
