@@ -1,31 +1,15 @@
-import router from './routes/index.router';
-import User from './app/models/User';
+import init from './services/socket/socket';
 import SocketIO from 'socket.io';
-import Express from 'express';
+import express from 'express';
 import http from 'http';
-import cors from 'cors';
 import 'dotenv/config';
 
 class App {
   constructor() {
-    this.server = Express();
-    this.middlewares();
-    this.routes();
-    this.socket = this.configSocket();
-  }
-  
-  routes() {
-    this.server.use(router);
-  }
-
-  middlewares() {
-    this.server.use(Express.json());
-    this.server.use(cors());
-  }
-
-  configSocket() {
-    return new SocketIO(http.createServer(this.server));
-    import './services/socket/socket';
+    this.server = http.createServer(express());
+    this.socket = SocketIO.listen(this.server);
+    
+    init(this.socket);
   }
 }
 

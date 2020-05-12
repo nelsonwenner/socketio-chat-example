@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Join from '../pages/join/join';
-import Chat from '../pages/chat/index';
+import Chat from '../pages/chat/chat';
 
 const Routes = () => {
   return (
