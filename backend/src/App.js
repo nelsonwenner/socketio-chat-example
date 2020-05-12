@@ -13,7 +13,7 @@ class App {
     this.routes();
     this.socket = this.configSocket();
   }
-
+  
   routes() {
     this.server.use(router);
   }
@@ -25,7 +25,8 @@ class App {
 
   configSocket() {
     return new SocketIO(http.createServer(this.server));
+    import './services/socket/socket';
   }
 }
 
-export default new App().server;
+export default new App();
