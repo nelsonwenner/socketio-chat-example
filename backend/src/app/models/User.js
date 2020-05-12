@@ -4,7 +4,10 @@ class User {
     this.users = [];
   }
 
-  addUser(id, name, room) {
+  addUser({id, name, room}) {
+    name = name.trim().toLowerCase();
+    room = room.trim().toLowerCase();
+
     const user = {id, name, room};
     this.users.push(user);
     return user;
@@ -21,13 +24,9 @@ class User {
   }
 
   removeUser(id) {
-    const user = this.getUser(id);
+    const indexUser = this.users.findIndex((user) => user.id === id);
 
-    if (user) {
-      this.users = this.users.filter((user) => user.id !== id);
-    }
-
-    return user;
+    if (indexUser !== -1) return this.users.splice(indexUser, 1)[0];
   }
 }
 
