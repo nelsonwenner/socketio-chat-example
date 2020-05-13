@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { v4 } from 'uuid';
 import './join.css';
 
 import Join from '../../components/Join';

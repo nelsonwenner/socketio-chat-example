@@ -4,13 +4,13 @@ class User {
     this.users = [];
   }
 
-  addUser({id, name, room}) {
+  addUser(id, name, room) {
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
 
     const user = {id, name, room};
     this.users.push(user);
-    return user;
+    return { user };
   }
 
   getUserList(room) {
@@ -20,7 +20,7 @@ class User {
   }
 
   getUser(id) {
-    return this.users.filter((user) => user.id === id);
+    return this.users.find((user) => user.id === id);
   }
 
   removeUser(id) {
