@@ -23,6 +23,8 @@ class User {
     return this.users.find((user) => user.id === id);
   }
 
+  getUsersInRoom = (room) => this.users.filter((user) => user.room === room);
+
   removeUser(id) {
     const indexUser = this.users.findIndex((user) => user.id === id);
 

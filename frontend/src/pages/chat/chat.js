@@ -4,7 +4,11 @@ import './chat.css';
 import queryString from 'query-string';
 import socket from 'socket.io-client';
 
-import Chat from '../../components/Chat';
+import TextContainer from '../../components/TextContainer/TextContainer';
+import Messages from '../../components/message/messages';
+import InfoBar from '../../components/InfoBar';
+import Input from '../../components/Input';
+
 
 class ChatContainer extends Component {
   
@@ -16,7 +20,8 @@ class ChatContainer extends Component {
       room: '',
       socket: null,
       message: '',
-      messages: []
+      messages: [],
+      users: []
     }
   }
   
@@ -32,14 +37,18 @@ class ChatContainer extends Component {
 
   onMessages = (socket, messages) => {
     socket.on('message', message => this.setState({messages: [...messages, message]}));
-  } 
+  }
+  
+  onUsers = (socket) => {
+    socket.on('roomData', roomdata => this.setState({users: [...roomdata.users]}));
+  }
 
-  handleChange = (event) => {
+  setMessage = (event) => {
     event.preventDefault();
     this.setState({message: event.target.value});
   }
 
-  sendMenssage = (event) => {
+  sendMessage = (event) => {
     event.preventDefault();
 
     const { message } = this.state;
@@ -47,22 +56,25 @@ class ChatContainer extends Component {
     if (message) {
       this.state.socket.emit('sendMessage', message, () => this.setState({message: ''}));
     }
-
   } 
 
   render() {
-    const { message, socket, messages } = this.state;
-      
-    this.onMessages(socket, messages);
+    const { message, socket, messages, room, name, users } = this.state;
 
-    console.log(messages)
+    this.onMessages(socket, messages);
+    this.onUsers(socket);
+
+    console.log(users)
 
     return (
-      <Chat
-        value={ message }
-        onChange={ this.handleChange }
-        onKeyPress={ this.sendMenssage }
-      />
+      <div className="outerContainer">
+        <div className="container">
+          <InfoBar room={ room } />
+          <Messages messages={ messages } name={ name } />
+          <Input message={ message} setMessage={ this.setMessage } sendMessage={ this.sendMessage } />
+        </div>
+        <TextContainer users={users}/>
+      </div>
     )
   }
 }
