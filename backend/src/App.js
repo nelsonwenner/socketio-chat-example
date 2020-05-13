@@ -8,7 +8,7 @@ class App {
   constructor() {
     this.server = http.createServer(express());
     this.socket = SocketIO.listen(this.server);
-    
+  
     init(this.socket);
   }
 }
